@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Frequency Guessing Game</h1>
+    <h1>Frequency Gueng Game</h1>
     <p>Guess the frequency of the tone!</p>
     <div>
         <label for="guess">Your Guess (Hz):</label>
@@ -15,9 +15,15 @@
         <button id="submitGuess">Submit</button>
     </div>
     <p id="feedback"></p>
-    <script src="audio.js"></script>
-    <script src="ui.js"></script>
-    <script src="game.js"></script>
-    <script src="script.js"></script>
+    <button id="startGame">Start Game</button>
+   
+    
+    <div id="guessButtons">
+        <!-- Buttons will be dynamically created here -->
+    </div>
+    
+    <script type ="module" src="audio.js"></script>
+    <script type ="module" src="script.js"></script>
 </body>
 </html>
+

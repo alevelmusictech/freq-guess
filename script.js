@@ -1,26 +1,24 @@
 import { generateTone } from './audio.js';
-import { generateRandomFrequency } from './game.js';
-import { updateFeedbackMessage } from './ui.js';
+import { generateRandomFrequency, generateFrequencyButtons } from './game.js';
+import { createFrequencyButtons, updateFeedbackMessage } from './ui.js';
 
 let targetFrequency;
 
-// Start the game
-function startGame() {
-    targetFrequency = generateRandomFrequency(100, 1000); // Set a realistic range for testing
-    generateTone(targetFrequency);
-    updateFeedbackMessage('Guess the frequency!');
-}
+document.getElementById('startGame').addEventListener('click', () => {
+    targetFrequency = generateRandomFrequency(100, 1000);
+    console.log('Target Frequency:', targetFrequency); // Debug log
+    generateTone(targetFrequency, 2); // Play the random frequency for 2 seconds
 
-// Add event listener for the submit button
-document.getElementById('submitGuess').addEventListener('click', () => {
-    const guess = Number(document.getElementById('guess').value);
-    if (guess === targetFrequency) {
-        updateFeedbackMessage('Correct!');
-    } else if (guess > targetFrequency) {
-        updateFeedbackMessage('Lower!');
-    } else {
-        updateFeedbackMessage('Higher!');
-    }
+    const buttons = generateFrequencyButtons(targetFrequency, 50); // Generate frequency buttons
+    createFrequencyButtons(buttons, (isCorrect) => {
+        if (isCorrect) {
+            updateFeedbackMessage('Correct!');
+        } else {
+            updateFeedbackMessage('Wrong! Try again.');
+        }
+    });
+
+    updateFeedbackMessage('Guess the frequency!');
 });
 
-startGame();
+

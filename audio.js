@@ -1,14 +1,12 @@
-// Manages audio playback and tone generation
+const context = new (window.AudioContext || window.webkitAudioContext)();
 
-//generates a tone of a given frequency and duration
-export function generateTone(frequency, duration = 1) {
-    const context = new AudioContext();
+export function generateTone(frequency = 440, duration = 1) {
     const oscillator = context.createOscillator();
     oscillator.type = 'sine';
-    oscillator.frequency.value = frequency;
+    oscillator.frequency.setValueAtTime(frequency, context.currentTime);
     oscillator.connect(context.destination);
     oscillator.start();
     setTimeout(() => {
         oscillator.stop();
     }, duration * 1000);
-    }
+}
